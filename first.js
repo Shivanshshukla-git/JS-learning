@@ -49,11 +49,11 @@
 // let b = 20;
 // let c = 30;
 // if(a>=b && a>=c){
-//     console.log(`Bigger number is a - ${a}`);
+//     console.log(`Bigger Number is a - ${a}`);
 // } else if(b>=a && b>=c){
-//     console.log(`Bigger number is b - ${b}`);
+//     console.log(`Bigger Number is b - ${b}`);
 // } else{
-//     console.log(`Bigger number is c - ${c}`);
+//     console.log(`Bigger Number is c - ${c}`);
 // }
 
 // //Ques -3
@@ -67,11 +67,11 @@
 // }
 
 // if(password.includes('1')){
-//     console.log(`Contains the number 1`)
+//     console.log(`Contains the Number 1`)
 // }
 
 // //Ques -4
-// let num = Number(prompt(`Enter the number`));
+// let num = Number(prompt(`Enter the Number`));
 // if(num>0){
 //     if(num%2===0){
 //         console.log(`${num} is positive and even`)
@@ -103,24 +103,11 @@
 
 // function getDay(day){
 //     if(day === "monday") return "Start of work week";
-//     else if(day === "saturday" || day === "sunday") return "weekend arrived";
+//     else if(day === "saturday" || day === "sunday") return "It's weekend";
 //     else return "working days";
 // }
 // console.log(getDay("saturday"));
 
-
-// let num= Number(prompt("Enter your score"));
-// function getGrade(score){
-//     if(score<=100 && score>=90) return "A+";
-//     else if(score<90 && score>=80) return "A";
-//     else if(score<80 && score>=70) return "B";
-//     else if(score<70 && score>=60) return "C";
-//     else if(score<60 && score>=50) return "D";
-//     else if(score<50 && score>33) return "Just pass";
-//     else if(score<=33 && score>=0) return "Try next time";
-//     else return "Enter a valid score";
-// }
-// console.log(getGrade(num));
 
 // //ROCK PAPER SCISSORS -
 // let user= prompt("Your move- rock, paper or scissors?");
@@ -146,7 +133,8 @@
 //     }
 //     else return "Enter valid move";
 // };
-// console.log(rps(user, computer));
+// let result= rps(user, computer);
+// console.log(result);
 
 
 // let year= Number(prompt("Enter a year"));
@@ -184,7 +172,7 @@
 //     console.log(`${n}*${i}= ${n*i} `);
 // }
 
-// let num=Number(prompt(`Enter a number`));
+// let num=Number(prompt(`Enter a Number`));
 // let result=1;
 // for(let i=1; i<=num; i++){
 //     result=result*i;
@@ -222,7 +210,7 @@
 //     console.log(i);
 // }
 
-// let num=Number(prompt(`Enter a Number`));
+// let num=Number(prompt(`Enter a number`));
 // let i=1;
 // while(i <= num){
 //     if(i%2 === 0){
@@ -255,9 +243,232 @@
 
 // let count= 0;
 // for(let i=1; i<=100; i++){
-//     if(i%2===1){          //odd numbers
+//     if(i%2===1){          //odd Numbers
 //         count++;
 //         console.log(i);
 //     }
 //     if(count===7) break;
 // }
+
+
+// for(let i=1; i<=5; i++){
+//     let row="";
+//     for(let j=1; j<=i; j++){
+//         row=row+"*";
+//     }
+//     console.log(row)
+// }
+
+
+// FUNCTIONS -
+
+// function greet(){
+//     console.log(`Hello!`)
+// };
+// greet();
+
+// function Greet(fullName){
+//     console.log(`Hello ${fullName}`)
+// }
+// Greet("Shivansh");
+
+// function add(x, y){
+//     return x+y;
+// };
+// console.log(add(7,9));
+
+// let num=Number(prompt("Enter a Number"));
+// function isEven(num){
+//     if(num%2===0) return `The Number ${num} is even`;
+//     else return `The Number ${num} is odd`;
+// }
+// console.log(isEven(num));
+
+
+// function maxOfTwo(x, y){
+//     if(x>y) return `The larger Number is ${x}`;
+//     else return `The larger Number is ${y}`
+// }
+// console.log(maxOfTwo(3,4));
+
+// let num=Number(prompt("Enter a Number"));
+// function factorial(num){
+//     let result=1;
+//     for(let i=1; i<=num; i++){
+//         result=result*i;
+//     }
+//     return result;
+// }
+// console.log(factorial(num));
+
+
+// let score=Number(prompt("Enter your score"));
+// function getGrade(score){
+//     if(score>100 || score<0) return "Enter a valid score";
+//     else if(score>=90) return "A+";
+//     else if(score>=80) return "A";
+//     else if(score>=70) return "B";
+//     else if(score>=60) return "C";
+//     else if(score>=50) return "D";
+//     else if(score>=33) return "Just Pass";
+//     else if(score>=0 && score<33) return "Fail";
+// }
+// console.log(getGrade(score));
+
+
+// function isLeapYear(year){
+//     if((year%4===0 && year%100!==0) || (year%400===0)) return true;
+//     else return false;
+// };
+// console.log(isLeapYear(1900));
+
+// FUCNTION STATEMENT (or DECLARATION) and FUNCTION EXPRESSION -
+// function greet1(){
+//     console.log("Hello")
+// }                            //It's Function Statement
+// greet1();
+
+// let greet2 = function() {
+//     console.log("Hello");
+// }                            //It's Function Expression
+// greet2();
+
+// Arrow functions are always expression, never statement
+// const greet3=(fullName1)=>{
+//     return `Hello ${fullName1}`;
+// }
+// console.log(greet3("Shivansh"));
+
+//DEFAULT PARAMETER - It helps to set default values..
+// function greet4(fullName2="Stranger"){
+//     console.log(`Hello ${fullName2}`);
+// }
+// greet4();
+// greet4("Shivansh");
+
+//REST PARAMETER - Collects multiple arguments into a single array.
+// function add(...num){                // collected all values into a array  
+//     let sum=0;
+//     for(let i=0; i<num.length; i++){      //the loop runs according to the length of the array
+//         sum=sum+num[i];                   
+//     }
+//     return sum;
+// }
+// console.log(add(3, 4, 5, 6, 90, 39, 75));
+
+
+// function int(x,y, ...num){         //the starting two values are of x and y and rest goes in array
+//     console.log(x+y,...num);
+// }
+// int(2, 3, 4, 5, 6);
+
+
+// //FIRST CLASS FUNCTION - functions are treated as values and stored in variables:
+// let substract = function(x, y){
+//     return x-y;
+// }
+// console.log(substract(10, 4));
+
+// //HIGHER ORDER FUNCTION - function that uses another function:
+// function greet5(fullName3 = "Stranger"){
+//     return function anotherGreet(surName = "things"){
+//         return `Hello ${fullName3} ${surName}`;
+//     }
+// }
+// console.log(greet5()());
+
+// //OR-           // Must use return when passing another function inside
+
+// function greet5(fullName3 = "Stranger"){
+//     function anotherGreet(surName = "things"){
+//         return `Hello ${fullName3} ${surName}`;
+//     }
+//     return anotherGreet;
+// }
+// console.log(greet5()());
+
+// //OR -
+
+// function greetThreeTimes(fn){
+//     fn();
+//     fn();             // fn() means run the function that was passed in. Here we passed another function as argument in a function.
+//     fn();
+// }
+// function sayHello(){
+//     console.log("Hello");
+// }
+// greetThreeTimes(sayHello);
+
+//PURE VS IMPURE -
+//PURE - Same input always gives same output.
+// function add(a, b){
+//     return a+b;
+// }
+// console.log(add(2,3));
+// console.log(add(2,3));
+
+// //IMPURE - changes something outside or same input gives different output different time.
+// let total=0;
+// function addToTotal(x){
+//     total=total+x;
+//     return total;
+// }
+// console.log(addToTotal(5));
+// console.log(addToTotal(5));
+
+// //LEXICAL SCOPE AND CLOSURE -
+// //LEXICAL SCOPE - Inner functions can see outer variables but outer functions can't see inner variables. Main Use would be Data Privacy/ Encapsulation
+// // function outer(){
+// //     let outerVar = "I am outer";
+
+// //     function inner(){
+// //         let innerVar = "I am inner";
+// //         console.log(outerVar);      //Works- inner can see outer
+// //         console.log(outerVar);      //Works
+// //     }
+// //     inner();
+// //     console.log(innerVar);         //Error- outer can't see inner
+// // }
+// // outer();
+
+// let city= "Indore";                //Outer scope
+// function showCity(){
+//     console.log(city);            //Can access city from outside
+    
+//     let college="MIT";            //inner scope
+
+//     function showCollege(){         //Can access both city and college
+//         console.log(city);
+//         console.log(college);
+//     }
+//     showCollege();
+// }
+// showCity();
+// //console.log(college);            //Error- College only exists inside showCity
+
+// //CLOSURE - Inner function remembers outer variables even after outer function is done
+// function makeCount(){
+//     let count=0;                     //Outer variable
+    
+//     return function(){               //Inner Function
+//         count++;
+//         return count;
+//     };
+// }
+// let counter= makeCount();
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
+// let counter2= makeCount();
+// console.log(counter2());
+// console.log(counter2());
+
+
+// //IIFE (IMMEDIATELY INVOKED FUNCTION EXPRESSION) - functions that run immediately, Variables stay private..
+// (function(){
+//     let secret="Password123";
+//     console.log("Setup done");
+// })();
+// console.log(secret)               //Error - Secret doesn't exist outside
+
+
