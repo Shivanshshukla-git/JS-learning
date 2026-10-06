@@ -121,3 +121,40 @@ console.log(counter.decrement());
 console.log(counter.increment());
 console.log(counter.reset());
 
+// Write a function that takes any number of arguments and returns the largest one (use rest + loop or reduce).
+function largestNum(...num){
+    return num.reduce((prev, curr)=> prev>curr?prev:curr);
+};
+console.log(largestNum(89, 67, 75, 94, 9));
+
+// Array of students with marks → find average marks using reduce → give grade using your old grade logic.
+let marks= [65, 75, 74, 85, 23];
+console.log(marks.length);
+let avg= marks.reduce((prev, curr)=> prev+curr)/marks.length;
+console.log(avg);
+function getGrade(score){
+    if(score>100 || score<0) return "Enter a valid score";
+    else if(score>=90) return "A+";
+    else if(score>=80) return "A";
+    else if(score>=70) return "B";
+    else if(score>=60) return "C";
+    else if(score>=50) return "D";
+    else if(score>=33) return "Just Pass";
+    return "Fail";
+}
+console.log(getGrade(avg));
+
+//Array of products → filter products under 1000 → get only their names → join into a string.
+let products= [
+    {name: "Laptop", price:75000},
+    {name: "Mouse", price: 800},
+    {name: "Keyboard", price: 1500},
+    {name: "Monitor", price: 12000},
+    {name: "Motherboard", price:7000},
+    {name: "Processor", price:20000}
+];
+let expensiveProducts= products.filter((val)=> val.price>2000);
+console.log(expensiveProducts);
+let onlyProductName= expensiveProducts.map((val)=> val.name);
+console.log(onlyProductName);
+console.log(onlyProductName.join(" , "));
