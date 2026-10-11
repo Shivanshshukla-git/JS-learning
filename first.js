@@ -237,3 +237,246 @@ btn2.addEventListener("click", function(){
 });
 
 
+// Mouse related Events :
+// We have already used click. Similarly we use dblclick for double click;
+
+// mouseenter and mouseleave -
+const box=document.querySelector(".hoverBox");
+// Triggers when mouse cursor steps inside the box
+box.addEventListener("mouseenter", function(){
+    box.style.backgroundColor = "lightcoral";
+    box.textContent = "Welcome inside!";
+});
+// Triggers when mouse cursor steps outside the box
+  box.addEventListener("mouseleave", function() {
+    box.style.backgroundColor = "lightblue";
+    box.textContent = "Hover over me!";
+  });
+
+// mouseover and mouseout - 
+// If your main box has a child element inside it (like a button or a heading), mouseover will trigger again when you move your mouse onto that child element.
+// mouseenter stays quiet and only tracks the outer boundary.
+const parent = document.querySelector("#parentBox");
+const countSpan = document.querySelector("#count");
+let counter = 0;
+
+  // Try moving your mouse between the gray box and the button.
+  // The counter will keep going up because it detects child elements!
+parent.addEventListener("mouseover", function(){
+    counter++;
+    countSpan.textContent = counter;
+});
+
+// mousedown and mouseup - 
+// A standard click event is actually a combination of two separate actions: pressing down and letting go.
+// mousedown triggers the exact millisecond the mouse button is pressed down.
+// mouseup triggers the millisecond the mouse button is released.
+
+const pressBtn = document.querySelector(".pressBtn");
+// Triggers when you press your mouse click down
+pressBtn.addEventListener("mousedown", function(){
+    pressBtn.style.backgroundColor = "orange";
+    pressBtn.textContent = "Holding down...";
+});
+
+// Triggers when you let go of the mouse click
+pressBtn.addEventListener("mouseup", function(){
+    pressBtn.style.backgroundColor = "gold";
+    pressBtn.textContent = "Press and Hold Me!";
+});
+
+
+// mousemove - This event fires continuously every single pixel your mouse moves over an element.
+//  It is commonly used for tracking coordinates or making custom mouse cursors.
+const area = document.querySelector("#trackArea");
+const text = document.querySelector("#coordinates");
+
+// 'event' (or 'e') is an object provided by JS that holds info about the event.
+area.addEventListener("mousemove", function(event) {
+    // offsetX and offsetY give the coordinates relative to the box boundary
+    let x = event.offsetX;
+    let y = event.offsetY;
+    
+    text.textContent = `X: ${x}, Y: ${y}`;
+});
+
+
+// FORMS and INPUTS - The input event triggers every single time a user types or changes something inside a text field, checkbox, or textarea.
+// Real-World Use: real-time password strength bars.
+const input1= document.querySelector("#usernameInput");
+const preview = document.querySelector("#previewText");
+
+// Fires immediately with every character typed or deleted
+input1.addEventListener("input", function(event) {
+    // event.target.value gets exactly what is typed inside the input box
+    preview.textContent = event.target.value;
+});
+
+
+// change - Unline input, For a text field, it only triggers when the user finishes typing and clicks away (blurs) from the input field.
+const selectl = document.querySelector("#colorSelect");
+
+// Fires only when a new option is completely selected
+selectl.addEventListener("change", function(event) {
+    document.body.style.backgroundColor = event.target.value;
+});
+
+
+// submit - This event belongs to the <form> tag. It triggers when a user clicks a "Submit" button or presses Enter inside a form.
+// Crucial Rule: By default, forms try to refresh the browser page when submitted. 
+// We use event.preventDefault() to stop this so JavaScript can handle the data smoothly without page reloads (exactly how web apps like WhatsApp & Gmail Web work).
+const form = document.querySelector("#loginForm");
+const todoItem = document.querySelector("#todoItem");
+const taskList = document.querySelector("#taskList");
+
+form.addEventListener("submit", function(event) {
+    // 1. STOP the page from refreshing automatically
+    event.preventDefault();                            // prevent default behaviour of browser;
+
+    // 2. Do what you want with the data (e.g., make a list item)
+    const newLi = document.createElement("li");
+    newLi.textContent = todoItem.value;
+    taskList.appendChild(newLi);
+
+    // 3. Clear the input field box for the next item
+    todoItem.value = "";
+});
+
+// focus & blur - focus triggers the millisecond a user clicks inside an input box to start typing.
+// blur triggers the millisecond a user clicks outside or leaves the input box.
+// Real World Use: Highlighting a text box with a blue border when active (focus), and validating if an email format is correct after they leave it (blur).
+const emailInput = document.querySelector("#emailInput");
+const msg = document.querySelector("#message");
+
+// When user clicks into the text box
+emailInput.addEventListener("focus", function() {
+    emailInput.style.borderColor = "blue";
+    msg.textContent = "Typing...";
+});
+
+// When user clicks out of the text box
+emailInput.addEventListener("blur", function() {
+    emailInput.style.borderColor = "gray";
+    msg.textContent = "Input saved / left in half.";
+});
+
+
+// Keyboard Events - These are the two main keyboard events used in modern web development.
+// keydown: Fires the exact millisecond a key is pressed down. If you hold the key down, it will keep firing repeatedly.
+// keyup: Fires only when you let go of the key.
+const box1 = document.querySelector("#box1");
+const statusText = document.querySelector("#status");
+
+// We attach keyboard events to 'window' so it listens anywhere on the page
+window.addEventListener("keydown", function(event) {
+    box1.style.transform = "scale(1.2)";             // Grows bigger when key is pressed
+    statusText.textContent = `You are pressing: ${event.key}`;
+});
+
+window.addEventListener("keyup", function(event) {
+    box1.style.transform = "scale(1)"; // Shrinks back when you release
+    statusText.textContent = "Key released!";
+});
+
+// a practice game using keydown and keyup events - 
+const player = document.querySelector("#player");
+let positionX = 0;                          // Starting position in pixels
+let positionY = 0;
+
+window.addEventListener("keydown", function(event) {
+    if (event.key === "ArrowRight"){
+      positionX += 20;                      // Move 20px right
+      player.style.left = positionX + "px";
+    } 
+    else if (event.key === "ArrowLeft"){
+      positionX -= 20;                      // Move 20px left
+      player.style.left = positionX + "px";
+    }
+    else if(event.key === "ArrowUp"){
+        positionY += 20;
+        player.style.top = positionY + "px";     
+    }
+    else if(event.key === "ArrowDown"){
+        positionY -= 20;
+        player.style.top = positionY + "px";     
+    }
+});
+
+
+// DOMContentLoaded (HTML is ready) vs load (everything including images is ready) - 
+// DOMContentLoaded (HTML Ready): Triggers the exact millisecond the browser finishes loading the basic HTML structure and builds the DOM tree. 
+// It does not wait for heavy images, stylesheets, or ads to finish loading. It is the best place to put your JavaScript so it runs as fast as possible.
+
+// This will fire FIRST
+document.addEventListener("DOMContentLoaded", function() {
+    console.log("HTML structure is ready! You can select elements safely now.");
+});
+
+// load (Everything Ready): Triggers only when the entire page is fully loaded, including all massive images, CSS files, frames, and external scripts.
+
+// This will fire LATER (after images load)
+window.addEventListener("load", function(){
+    console.log("The entire website (including heavy images) has finished loading!");
+});
+
+
+// scroll - This event fires continuously as the user scrolls up or down the webpage
+// Real-World Use: Creating a "Back to Top" button that only appears after scrolling down, etc..
+
+const nav = document.querySelector("#navDiv");
+
+window.addEventListener("scroll", function(){
+    // window.scrollY tells us how many pixels the user has scrolled down
+    if (window.scrollY > 200) {
+        nav.style.backgroundColor = "black";
+        nav.style.color = "white";
+    } else {
+        nav.style.backgroundColor = "lightcoral";
+        nav.style.color = "black";
+    }
+});
+
+
+// resize - This event triggers whenever the browser window size changes 
+// e.g., maximizing the window, pulling the edges to make it smaller, or flipping a mobile phone from portrait to landscape mode.
+const dimensionsText = document.querySelector("#dimensions");
+
+window.addEventListener("resize", function(){
+    // window.innerWidth and innerHeight captures the current width and height of the browser view screen;
+    let currentWidth = window.innerWidth;
+    let currentHeight = window.innerHeight;
+    dimensionsText.textContent = `Width: ${currentWidth}px, Height: ${currentHeight}px`;
+});
+
+
+// event.target & event.currentTarget:
+// • event.target (The Origin): The exact element you actually clicked on (the absolute target).
+// • event.currentTarget (The Owner): The element that holds the addEventListener that is currently running.
+
+// We attach the listener ONLY to the parent box - 
+parent.addEventListener("click", function(event){
+    // If you click the button:
+    console.log("target:", event.target);               // Output: <button> element
+    console.log("currentTarget:", event.currentTarget); // Output: <div> element
+});
+
+
+// event.type - This is a simple property that returns a string representing the name of the event that was triggered (e.g., "click", "mouseover", "keydown"). 
+// It is incredibly useful if you are using a single function to handle multiple types of events.
+
+function handleEvent(event){
+    console.log(`The event type is: ${event.type}`);
+};
+pressBtn.addEventListener("click", handleEvent);
+pressBtn.addEventListener("mouseover", handleEvent);
+
+
+// event.preventDefault() - Browsers have built-in default actions for certain elements. For example, clicking a link (<a>) and submitting a form (<form>).
+// preventDefault() tells the browser: "Stop! Do not do your default behavior. Let my JavaScript handle it instead."
+
+const link = document.querySelector("#myLink");
+
+link.addEventListener("click", function(event) {
+    event.preventDefault();                      // Prevents the browser from opening Google!
+    alert("Google is blocked! JavaScript is in control.");
+});
