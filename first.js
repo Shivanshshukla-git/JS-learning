@@ -305,7 +305,6 @@ area.addEventListener("mousemove", function(event) {
 // Real-World Use: real-time password strength bars.
 const input1= document.querySelector("#usernameInput");
 const preview = document.querySelector("#previewText");
-
 // Fires immediately with every character typed or deleted
 input1.addEventListener("input", function(event) {
     // event.target.value gets exactly what is typed inside the input box
@@ -315,7 +314,6 @@ input1.addEventListener("input", function(event) {
 
 // change - Unline input, For a text field, it only triggers when the user finishes typing and clicks away (blurs) from the input field.
 const selectl = document.querySelector("#colorSelect");
-
 // Fires only when a new option is completely selected
 selectl.addEventListener("change", function(event) {
     document.body.style.backgroundColor = event.target.value;
@@ -329,9 +327,9 @@ const form = document.querySelector("#loginForm");
 const todoItem = document.querySelector("#todoItem");
 const taskList = document.querySelector("#taskList");
 
-form.addEventListener("submit", function(event) {
+form.addEventListener("submit", function(detail) {
     // 1. STOP the page from refreshing automatically
-    event.preventDefault();                            // prevent default behaviour of browser;
+    detail.preventDefault();                            // prevent default behaviour of browser;
 
     // 2. Do what you want with the data (e.g., make a list item)
     const newLi = document.createElement("li");
@@ -368,7 +366,7 @@ const box1 = document.querySelector("#box1");
 const statusText = document.querySelector("#status");
 
 // We attach keyboard events to 'window' so it listens anywhere on the page
-window.addEventListener("keydown", function(event) {
+window.addEventListener("keydown", function(event){
     box1.style.transform = "scale(1.2)";             // Grows bigger when key is pressed
     statusText.textContent = `You are pressing: ${event.key}`;
 });
@@ -427,7 +425,7 @@ const nav = document.querySelector("#navDiv");
 
 window.addEventListener("scroll", function(){
     // window.scrollY tells us how many pixels the user has scrolled down
-    if (window.scrollY > 200) {
+    if (window.scrollY > 600) {
         nav.style.backgroundColor = "black";
         nav.style.color = "white";
     } else {
@@ -480,3 +478,78 @@ link.addEventListener("click", function(event) {
     event.preventDefault();                      // Prevents the browser from opening Google!
     alert("Google is blocked! JavaScript is in control.");
 });
+
+
+// event bubbling (the natural default) - When an event happens on an HTML element, it doesn't just stop there. 
+// It bubbles up to its parent element, then to its grandparent element, all the way up to the top (window), triggering any event listeners attached along that path.
+
+// If you click the child button, ALL THREE alerts will trigger one after another!
+// document.querySelector("#grandparent").addEventListener("click", function() {
+//     alert("Grandparent Clicked!");
+// });
+
+// document.querySelector("#parent").addEventListener("click", function() {
+//     alert("Parent Clicked!");
+// });
+
+// document.querySelector("#child").addEventListener("click", function() {
+//     alert("Child Clicked!");
+// });
+
+// event.stopPropagation() - What if you only want the child button's click behavior to run and want to block it from triggering the parent boxes?
+// This is where you use a special method: event.stopPropagation(). It snaps the event chain in half and stops the bubble from rising.
+
+// document.querySelector("#child").addEventListener("click", function(){
+//     // Stops the event from traveling up to Parent and Grandparent!
+//     event.stopPropagation(); 
+//     alert("Only the Child button was clicked!");
+// });
+
+
+// Event Capturing / Trickling - Event Capturing is the exact opposite of bubbling. 
+// Instead of going from the bottom up, the event starts at the very top (window / document) and trickles down to the element you actually clicked.
+// By default, JavaScript runs everything in the bubbling phase. 
+// If we want to force an event to run during the capturing phase instead, we need to pass a third argument true inside your addEventListener.
+
+document.querySelector("#grandparent").addEventListener("click", () => alert("grandParent"), true);
+document.querySelector("#parent").addEventListener("click", () => alert("Parent"), true);
+document.querySelector("#child").addEventListener("click", () => alert("Child"), true);
+
+// Event Delegation - Event delegation is a design pattern in JS where we attach a single event listener to a parent element instead of adding individual listeners to multiple child elements.
+
+const parentList = document.querySelector("#itemList");
+// Only ONE event listener manages every current and future list item!
+parentList.addEventListener("click", function(detail) {
+    // event.target tells us exactly which specific child was clicked;
+    if (detail.target.tagName === "LI") {
+      detail.target.classList.toggle("lt");
+    }
+});
+
+
+// once - runs only once, then removes itself:
+
+const claimBtn = document.querySelector("#claimBtn");
+// This code runs on the first click, then deletes itself automatically!
+claimBtn.addEventListener("click", function(){
+  alert("Cashback claimed! You cannot claim it again.");
+}, { once: true }); 
+
+
+
+// File selecting project practice using events - 
+const fileinp= document.querySelector("#fileinp");
+const btnDiv= document.querySelector("#btnDiv");
+btnDiv.addEventListener("click", function(){
+    fileinp.click();
+})
+// fileinp.addEventListener("change", function(detail){                         
+//     btnDiv.textContent= detail.target?.files[0].name;   //but this will cause error if we cancel without selecting the file cause then there will be no name of file;
+// })
+fileinp.addEventListener("change", function(detail){
+    const file= detail.target.files[0];
+    if(file){
+        btnDiv.textContent= file.name;
+    }
+});
+

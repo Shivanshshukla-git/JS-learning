@@ -88,3 +88,29 @@ body.dark{
     font-weight: bold;
     transition: 0.3s;
 }
+#parent{
+    padding: 30px;
+    background-color: darkgray;
+}
+#grandparent{
+    padding: 40px;
+    background-color: lightgray;
+}
+#btnDiv{
+    background-color: rgb(41, 143, 114); 
+    border-radius: 5px; 
+    color: white; 
+    padding: 12px 22px; 
+    width: 8rem;
+    height: auto;
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+#btnDiv:hover{
+    background-color: rgb(27, 71, 59);
+}
+.lt{
+    text-decoration: line-through;
+    color: rgb(139, 54, 54);
+}

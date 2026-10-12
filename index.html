@@ -24,6 +24,14 @@
 
     <br>
 
+    <div id="grandparent">
+        Grandparent Box
+        <div id="parent">
+            Parent Box
+            <button id="child" style="padding: 10px;">Click Me!</button>
+        </div>
+    </div>
+
     <a href="https://google.com" id="myLink">Go to Google</a>
     
     <div id="trackArea"> Move your mouse here!</div>
@@ -44,6 +52,14 @@
     <p>Press the <b>ArrowRight</b> or <b>ArrowLeft</b> or <b>ArrowUp</b> or <b>ArrowDown</b> key!</p>
     <div id="player"></div>
 
+    <ul id="itemList" style="background-color: #f4f4f4; padding: 20px;">
+        <li>Item One 🍎</li>
+        <li>Item Two 🍌</li>
+        <li>Item Three 🍉</li>
+    </ul>
+
+    <button id="claimBtn">Claim Cashback!</button>
+
     <div id="navDiv">
         My Sticky Navbar
     </div>
@@ -55,12 +71,20 @@
     <p>Live Preview: <span id="previewText"></span></p>
 
     <select id="colorSelect">
-        <option value="white">Choose a background color</option>
+        <option value="white" selected disabled>Choose a background color</option>
         <option value="lightgreen">Green</option>
         <option value="lightpink">Pink</option>
         <option value="lightyellow">Yellow</option>
         <option value="#121212">Dark Mode</option>
     </select>
+
+    <div id="bigDiv" style="margin-block: 0.5rem;">
+        <input type="file" id="fileinp" style="display: none;">
+        <div id="btnDiv">
+            Upload File
+        </div>
+    </div>
+
     <br>
     <input type="email" id="emailInput" placeholder="Enter your email">
     <p id="message" style="font-size: 14px; color: gray;"></p>
