@@ -158,3 +158,36 @@ console.log(expensiveProducts);
 let onlyProductName= expensiveProducts.map((val)=> val.name);
 console.log(onlyProductName);
 console.log(onlyProductName.join(" , "));
+
+// practising events and form validation - 
+const form= document.querySelector("form");
+const username= document.querySelector("#username");
+const password= document.querySelector("#password");
+
+const userRegex= /^[a-zA-Z0-9]{3,15}$/;
+const passRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
+
+
+form.addEventListener("submit", function(detail){
+    detail.preventDefault();
+
+    let hasError= false;
+    let errormsg= document.querySelectorAll(".hide");
+    
+    const usernameValue= username.value.trim();           //trims spaces in start and end.
+    const passwordValue= password.value.trim();
+
+    if(!userRegex.test(usernameValue)){
+        errormsg[0].classList.remove("hide");
+        hasError= true;
+    }
+
+    if(!passRegex.test(passwordValue)){
+        errormsg[1].classList.remove("hide");
+        hasError= true;
+    }
+
+    if(!hasError){
+        document.querySelector("#res").textContent= "Form Submitted Successfully";
+    }
+});

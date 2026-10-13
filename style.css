@@ -1,0 +1,9 @@
+#loginForm {
+  display: flex;
+  flex-direction: column;                   /* This stacks all children vertically */
+  gap: 15px;                                /* Adds clean space between the stacked items */
+  width: 250px;                             /* Gives the container a neat width */
+}
+.hide{
+    display: none;
+}
