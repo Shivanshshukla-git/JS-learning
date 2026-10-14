@@ -1,0 +1,33 @@
+.otp-container{
+    font-family: sans-serif; 
+    text-align: center; 
+    width: 300px; 
+    margin: 50px auto; 
+    padding: 20px; 
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+#otpInput{
+    padding: 10px; 
+    font-size: 18px; 
+    text-align: center; 
+    width: 80%; 
+    margin-bottom: 15px;
+}
+#verifyBtn{
+    padding: 10px 20px; 
+    cursor: pointer; 
+    background: green; 
+    color: white; 
+    border: none; 
+    border-radius: 4px;
+}
+#resendBtn{
+    padding: 10px 20px; 
+    cursor: not-allowed; 
+    background: gray; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    margin-left: 10px;
+}

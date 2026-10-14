@@ -4,8 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning JS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <button id="alertBtn">Trigger Delayed Notification</button>
+    <button id="cancelAlertBtn" style="background-color: lightcoral;">Cancel Notification</button>
+    <h3 id="timerStatus"></h3>
+
+    <button id="toggleBtn" style="padding: 10px 20px; font-size: 16px; cursor: pointer;"> Start Timer (5s)</button>
+    <p id="statusText">Status: Idle</p>
+
+    <div class="otp-container">
+        <h3>Enter OTP</h3>
+        <input type="text" id="otpInput" placeholder="XXXXXX" maxlength="6"><br>
+        
+        <!-- The live countdown element -->
+        <p id="timerDisplay" style="font-weight: bold; color: crimson;">Time remaining: 20s</p>
+        
+        <!-- Action buttons -->
+        <button id="verifyBtn">Verify OTP</button>
+        <button id="resendBtn" disabled>Resend</button>
+    </div>
+
     <script src="first.js"></script>
 </body>
 </html>
