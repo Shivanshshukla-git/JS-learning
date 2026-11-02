@@ -369,3 +369,380 @@ showInfo.call(teacher);             // Mr Sharma: 95;
 const numbers = [5, 2, 8, 1, 9];
 console.log(Math.max.apply(null, numbers));               // 9
 
+
+
+// CLASS & OOP - OOP is a way of organizing code around objects that bundle data (properties) and behavior (methods) together.
+// function BrandStyle(name, color){
+//     this.name= name;
+//     this.color= color;
+// } 
+
+// BrandStyle.prototype.greet= function(){
+//     console.log(`This is "${this.name}" Pencil and it's of ${this.color} color`);
+// }
+// BrandStyle.prototype.write= function(){
+//     let h2 = document.createElement("h2");
+//     h2.textContent = this.name;
+//     h2.addEventListener("mouseover", ()=> {
+//         h2.style.color= this.color;
+//     })
+//     h2.addEventListener("mouseleave", ()=> {
+//         h2.style.color= "";
+//     })
+//     document.body.append(h2);
+// }
+
+// let p1= new BrandStyle("Natraj", "Red");
+// let p2= new BrandStyle("Doms", "Blue");
+
+// p1.greet();
+// p2.greet();
+
+// p1.write();
+
+// class CreatePen{
+//     constructor(name, color){
+//         this.name= name;
+//         this.color= color;
+//     }
+
+//     aboutPen(){
+//         const h2 = document.createElement("h2");
+//         h2.textContent = `${this.name} ${this.color} pen`;
+//         h2.addEventListener("mouseover", ()=> {
+//             h2.style.color= this.color;
+//         })
+//         h2.addEventListener("mouseleave", ()=> {
+//             h2.style.color= "";
+//         })
+//         document.body.append(h2);
+//         }
+// };
+
+// let p1= new CreatePen("Hauser XO", "Blue");
+// let p2= new CreatePen("Reynolds", "gray");
+
+// p1.aboutPen();
+// p2.aboutPen();
+// console.log(p1);
+
+// Inheritance- It allows one class to adopt all the variables and methods of another class automatically, so you don't have to re-write the same code again.
+// class Parent{
+//     constructor(name){
+//         this.name= name;
+//     }
+
+//     greet(){
+//         const h2= document.createElement("h2");
+//         h2.textContent= `Hi, I'm ${this.name}`;
+//         document.body.append(h2);
+//     }
+// };
+
+// class Child extends Parent{
+//     constructor(name, age){
+//         super(name);
+//         this.age= age;
+//     }
+
+//     showInfo(){
+//         const h2= document.createElement("h2");
+//         h2.textContent= `Hi, I'm ${this.name} and I'm ${this.age} years old`;
+//         document.body.append(h2);
+//     }
+
+//     remove(){
+//         document.querySelectorAll("h2").forEach(function(element){
+//             element.remove();
+//         })
+//     }
+// }
+
+// const parent= new Parent("Ajay");
+// parent.greet();
+// const child1= new Child("Kajal", 21);
+// const child2= new Child("Ankush", 20);
+// child1.showInfo();
+// child2.showInfo();
+// child1.greet();
+
+
+// class User{
+//     constructor(name, age, email, userName){
+//         this.name= name;
+//         this.age= age;
+//         this.email= email;
+//         this.userName= userName;
+//         this.role= "user";
+//         this.element= null;
+//     }
+
+//     showInfo(){
+//         this.element = document.createElement("h2");
+//         this.element.textContent = `${this.userName}: I'm ${this.name}, ${this.age} years old, email: ${this.email}`;
+//         document.body.append(this.element);
+//     }
+
+//     remove(){
+//         if (this.element){
+//             this.element.remove();
+//             this.element = null;
+//         }
+//     }
+// };
+
+// class Admin extends User{
+//     constructor(name, age, email, userName){
+//         super(name, age, email, userName);
+//         this.role= "Admin";
+//     }
+
+//     removeUser(user){
+//         user.remove();
+//     }
+// };
+
+// const u1= new User("Divya", 21, "dibi@gmail.com", "Divya123");
+// const u2= new User("Ankush", 20, "anka@gmail.com", "Akka-don");
+// const a1= new Admin("Shivansh", 20, "ImAdmin@gmail.com", "Admin1");
+// u1.showInfo();
+// u2.showInfo();
+// a1.showInfo();
+// u1.remove();
+// a1.remove();
+
+
+// Polymorphism - Polymorphism means “one name, many forms” means the same method name can work differently in different classes.
+// theoretically there are two types - overriding and overloading. But in real JavaScript code, we only use Method Overriding.
+
+// class Shape{
+//     area(){
+//         console.log("Which type of shape it is?");
+//     }
+// };
+// class Rectangle extends Shape{
+//     constructor(length, width){
+//         super();
+//         this.length = length;
+//         this.width = width;
+//     }
+//     area(){
+//         console.log(`The area of the given Rectangle is: ${this.length * this.width}`)
+//     }
+// }
+// let rec= new Rectangle(20, 10);
+// rec.area();
+
+// class Circle extends Shape{
+//     constructor(radius){
+//         super();
+//         this.radius = radius;
+//     }
+//     area(){
+//         console.log(`The area of the given Circle is: ${Math.PI * this.radius ** 2}`)
+//     }
+// }
+// let circle= new Circle(6);
+// circle.area();
+
+// const shapeList= [new Rectangle(40, 20), new Circle(7)];
+// shapeList.forEach(shape=>{
+//     shape.area();
+// })
+
+
+// // next example - 
+// class Vehicle{
+//     start(){
+//         console.log("This vehicle runs fast!")
+//     }
+// }
+// class Car extends Vehicle{
+//     start(){
+//         super.start();
+//         console.log("Car Started!");
+//     }
+// }
+// class Bike extends Vehicle{
+//     start(){
+//         console.log("Bike Started!");
+//     }
+// }
+
+// const vehicle1= new Car();
+// vehicle1.start()
+// const vehicle2= new Bike();
+// vehicle2.start();
+
+
+// Encapsulation - Encapsulation means bundling data and methods together and hiding the internal details from the outside.
+// Meaning to protect the data so it cannot be changed directly from outside the class. Modern JavaScript uses Private Fields with the # symbol.
+
+// class BankAccount{
+//     #balance = 0;               // private field;
+
+//     constructor(initialBalance){
+//         this.#balance= initialBalance;
+//     }
+
+//     deposit(amount){
+//         if(amount>0){
+//             this.#balance += amount;
+//         }
+//     }
+
+//     withdraw(amount){
+//         if(amount > 0 && amount <= this.#balance){
+//             this.#balance -= amount;
+//         }
+//     }
+
+//     getBalance(){
+//         return this.#balance;
+//     }
+// }
+
+// const acc= new BankAccount(1000);
+// acc.deposit(500);
+// console.log(acc.getBalance());
+// acc.withdraw(300);
+// console.log(acc.getBalance());
+// console.log(acc.#balance);             // Error: Private field
+
+// next Example - 
+// class User1{
+//     #password;
+
+//     constructor(name, password){
+//         this.name= name;
+//         this.#password= password;
+//     }
+
+//     checkPassword(input){
+//         return this.#password === input;
+//     }
+// }
+// const user1= new User1("Divya", "secret123");
+// console.log(user1.name);
+// console.log(user1.checkPassword("sec456"));               //false
+// console.log(u1.#password);          // Error
+
+
+// Getter & Setter - Getters and Setters let you control how properties are read and updated.
+// Getter → runs when you read a property; Setter → runs when you assign a value to a property.
+
+class User2{
+    constructor(name, age){
+        this.name = name;
+        this._age = age;                     // _ means internal;
+    }
+
+    get age(){                              // getter
+        return this._age;
+    }
+
+    set age(value){
+        if(value<0){
+            console.log("Please do not Joke!")
+            return;
+        }
+        this._age = value;
+    }
+}
+const user2= new User2("Ankush", 20);
+console.log(user2.age);
+user2.age = 25;
+console.log(user2.age);
+user2.age = -9;
+console.log(user2.age);
+
+// next Example - 
+class BankAccount{
+    #balance = 0;
+
+    get balance(){
+        return this.#balance;
+    }
+
+    set balance(amount){
+        if(amount>0){
+            this.#balance = amount;
+        }
+        else{
+            console.log("Invalid Amount");
+        }
+    }
+}
+const acc1 = new BankAccount();
+acc1.balance = 1000;
+console.log(acc1.balance);
+
+
+// Static Methods - Static methods belong to the class itself, not to the instances (objects). You call them on the class, not on the object.
+
+class MathHelper{
+    static add(a, b){
+        return a+b;
+    }
+
+    static multiply(a, b){
+        return a*b;
+    }
+}
+console.log(MathHelper.add(2, 9));
+console.log(MathHelper.multiply(2, 9));
+// const obj = new MathHelper();
+// obj.add(2, 3);                           // Error (not available on instance)
+
+// new Example - 
+class User3{
+    static count = 0;
+
+    constructor(name){
+        this.name = name;
+        User3.count++;
+    }
+
+    static getCount(){
+        return User3.count;
+    }
+}
+const user3 = new User3("Ankush");
+const user4 = new User3("Ankit");
+console.log(User3.getCount());
+
+
+// Private Methods - Private methods are methods that can only be used inside the class. They cannot be called from outside and We create them using #.
+// It helps in abstraction and it can be called by other methods of class.
+// Abstraction means hiding complex details and showing only the necessary parts. Simply, You don’t need to know how something works internally, you just use it.
+
+class CoffeeMachine{
+    #waterAmount = 0;
+
+    fillWater(amount){
+        this.#waterAmount += amount;
+    }
+
+    makeCoffee(){
+        if(this.#waterAmount < 50){
+            console.log("Don't Joke!");
+            return;
+        }
+
+        this.#boilWater();
+        this.#brew();
+        console.log("Coffee is Ready!");
+    }
+
+    // Private Methods (Abstraction)
+    #boilWater(){
+        console.log("Boiling Water...")
+    }
+
+    #brew(){
+        console.log("Brewing Coffee...")
+    }
+}
+const machine = new CoffeeMachine();
+machine.fillWater(100);
+machine.makeCoffee();
