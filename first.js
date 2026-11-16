@@ -746,3 +746,22 @@ class CoffeeMachine{
 const machine = new CoffeeMachine();
 machine.fillWater(100);
 machine.makeCoffee();
+
+// Composition = “Has-a” relationship. Instead of inheriting everything, you put an object inside another object.
+class Engine{
+    start(){
+        console.log("Engine Started!")
+    }
+}
+class Car{
+    constructor(){
+        this.engine = new Engine();                // Car HAS an Engine
+    }
+
+    startCar(){
+        this.engine.start();
+    }
+}
+
+const c1 = new Car();
+c1.startCar();                                     // Here Car does not inherit from Engine. It contains an Engine.
