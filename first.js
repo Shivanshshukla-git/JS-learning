@@ -539,7 +539,7 @@ console.log(Math.max.apply(null, numbers));               // 9
 //         this.radius = radius;
 //     }
 //     area(){
-//         console.log(`The area of the given Circle is: ${Math.PI * this.radius ** 2}`)
+//         console.log(`The area of the given Circle is: ${Math.PI * this.radius * this.radius}`)
 //     }
 // }
 // let circle= new Circle(6);
