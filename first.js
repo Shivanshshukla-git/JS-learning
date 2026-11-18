@@ -226,26 +226,26 @@ greet();    // window object in browser
 
 
 // Method — most common and useful : When a function is called as a method of an object, 'this' refers to that object. The object before the dot is 'this'.
-const person = {
-    name: "Shivansh",
-    greet: function() {
-        console.log(this.name);           // "Shivansh"
-    }
-};
+// const person = {
+//     name: "Shivansh",
+//     greet: function() {
+//         console.log(this.name);           // "Shivansh"
+//     }
+// };
 
-person.greet();                       // this = person object
-// OR 
-const car = {
-    brand: "Toyota",
-    speed: 0,
-    accelerate: function() {
-        this.speed += 10;                    // this = car
-        console.log(this.speed);
-    }
-};
+// person.greet();                       // this = person object
+// // OR 
+// const car = {
+//     brand: "Toyota",
+//     speed: 0,
+//     accelerate: function() {
+//         this.speed += 10;                    // this = car
+//         console.log(this.speed);
+//     }
+// };
 
-car.accelerate();                // 10
-car.accelerate();               // 20
+// car.accelerate();                // 10
+// car.accelerate();               // 20
 
 
 // Event listeners : In a regular function event listener, this is the element the event is attached to.
@@ -631,137 +631,329 @@ console.log(Math.max.apply(null, numbers));               // 9
 // Getter & Setter - Getters and Setters let you control how properties are read and updated.
 // Getter → runs when you read a property; Setter → runs when you assign a value to a property.
 
-class User2{
-    constructor(name, age){
-        this.name = name;
-        this._age = age;                     // _ means internal;
-    }
+// class User2{
+//     constructor(name, age){
+//         this.name = name;
+//         this._age = age;                     // _ means internal;
+//     }
 
-    get age(){                              // getter
-        return this._age;
-    }
+//     get age(){                              // getter
+//         return this._age;
+//     }
 
-    set age(value){
-        if(value<0){
-            console.log("Please do not Joke!")
-            return;
-        }
-        this._age = value;
-    }
-}
-const user2= new User2("Ankush", 20);
-console.log(user2.age);
-user2.age = 25;
-console.log(user2.age);
-user2.age = -9;
-console.log(user2.age);
+//     set age(value){
+//         if(value<0){
+//             console.log("Please do not Joke!")
+//             return;
+//         }
+//         this._age = value;
+//     }
+// }
+// const user2= new User2("Ankush", 20);
+// console.log(user2.age);
+// user2.age = 25;
+// console.log(user2.age);
+// user2.age = -9;
+// console.log(user2.age);
 
 // next Example - 
-class BankAccount{
-    #balance = 0;
+// class BankAccount{
+//     #balance = 0;
 
-    get balance(){
-        return this.#balance;
-    }
+//     get balance(){
+//         return this.#balance;
+//     }
 
-    set balance(amount){
-        if(amount>0){
-            this.#balance = amount;
-        }
-        else{
-            console.log("Invalid Amount");
-        }
-    }
-}
-const acc1 = new BankAccount();
-acc1.balance = 1000;
-console.log(acc1.balance);
+//     set balance(amount){
+//         if(amount>0){
+//             this.#balance = amount;
+//         }
+//         else{
+//             console.log("Invalid Amount");
+//         }
+//     }
+// }
+// const acc1 = new BankAccount();
+// acc1.balance = 1000;
+// console.log(acc1.balance);
 
 
 // Static Methods - Static methods belong to the class itself, not to the instances (objects). You call them on the class, not on the object.
 
-class MathHelper{
-    static add(a, b){
-        return a+b;
-    }
+// class MathHelper{
+//     static add(a, b){
+//         return a+b;
+//     }
 
-    static multiply(a, b){
-        return a*b;
-    }
-}
-console.log(MathHelper.add(2, 9));
-console.log(MathHelper.multiply(2, 9));
+//     static multiply(a, b){
+//         return a*b;
+//     }
+// }
+// console.log(MathHelper.add(2, 9));
+// console.log(MathHelper.multiply(2, 9));
 // const obj = new MathHelper();
 // obj.add(2, 3);                           // Error (not available on instance)
 
 // new Example - 
-class User3{
-    static count = 0;
+// class User3{
+//     static count = 0;
 
-    constructor(name){
-        this.name = name;
-        User3.count++;
-    }
+//     constructor(name){
+//         this.name = name;
+//         User3.count++;
+//     }
 
-    static getCount(){
-        return User3.count;
-    }
-}
-const user3 = new User3("Ankush");
-const user4 = new User3("Ankit");
-console.log(User3.getCount());
+//     static getCount(){
+//         return User3.count;
+//     }
+// }
+// const user3 = new User3("Ankush");
+// const user4 = new User3("Ankit");
+// console.log(User3.getCount());
 
 
 // Private Methods - Private methods are methods that can only be used inside the class. They cannot be called from outside and We create them using #.
 // It helps in abstraction and it can be called by other methods of class.
 // Abstraction means hiding complex details and showing only the necessary parts. Simply, You don’t need to know how something works internally, you just use it.
 
-class CoffeeMachine{
-    #waterAmount = 0;
+// class CoffeeMachine{
+//     #waterAmount = 0;
 
-    fillWater(amount){
-        this.#waterAmount += amount;
-    }
+//     fillWater(amount){
+//         this.#waterAmount += amount;
+//     }
 
-    makeCoffee(){
-        if(this.#waterAmount < 50){
-            console.log("Don't Joke!");
-            return;
-        }
+//     makeCoffee(){
+//         if(this.#waterAmount < 50){
+//             console.log("Don't Joke!");
+//             return;
+//         }
 
-        this.#boilWater();
-        this.#brew();
-        console.log("Coffee is Ready!");
-    }
+//         this.#boilWater();
+//         this.#brew();
+//         console.log("Coffee is Ready!");
+//     }
 
-    // Private Methods (Abstraction)
-    #boilWater(){
-        console.log("Boiling Water...")
-    }
+//     // Private Methods (Abstraction)
+//     #boilWater(){
+//         console.log("Boiling Water...")
+//     }
 
-    #brew(){
-        console.log("Brewing Coffee...")
-    }
-}
-const machine = new CoffeeMachine();
-machine.fillWater(100);
-machine.makeCoffee();
+//     #brew(){
+//         console.log("Brewing Coffee...")
+//     }
+// }
+// const machine = new CoffeeMachine();
+// machine.fillWater(100);
+// machine.makeCoffee();
 
 // Composition = “Has-a” relationship. Instead of inheriting everything, you put an object inside another object.
-class Engine{
-    start(){
-        console.log("Engine Started!")
-    }
-}
-class Car{
-    constructor(){
-        this.engine = new Engine();                // Car HAS an Engine
-    }
+// class Engine{
+//     start(){
+//         console.log("Engine Started!")
+//     }
+// }
+// class Car{
+//     constructor(){
+//         this.engine = new Engine();                // Car HAS an Engine
+//     }
 
-    startCar(){
-        this.engine.start();
-    }
+//     startCar(){
+//         this.engine.start();
+//     }
+// }
+
+// const c1 = new Car();
+// c1.startCar();                                     // Here Car does not inherit from Engine. It contains an Engine.
+
+
+
+// Asynchronous JS :
+// Synchronous vs asynchronous - Synchronous code runs line by line. Each line waits for the previous one to finish.
+// Asynchronous code starts a slow task (a timer, a network request, a file read), lets the rest of the program keep running, and handles the result when it’s ready.
+// Need of Asynchronous - JavaScript runs on a single thread. It can do only one thing at a time.
+// If everything was synchronous then whenever JS faced a slow task (like fetching data from server, etc.), the entire website would freeze until that task finished. 
+// So by using async JS - The program doesn’t wait. It continues running, and when the slow task finishes, the result is handled.
+
+// Real Uses of Async - Fetching data from an API, Timers (setTimeout, setInterval), Reading files, Database queries, User input events.
+
+// console.log("start");
+// setTimeout(function(){
+//     console.log("HeyHey!")
+// }, 3000);
+// console.log("end");
+
+// Callbacks - A callback is a function that you pass into another function, to be called later.
+// function greet1(name, callback){
+//     console.log(`Hello ${name}`)
+//     callback();
+// }
+// function sayBye(){
+//     console.log("GoodBye!");
+// }
+// function askQuestion(){
+//     console.log("How are you doing today?")
+// }
+// greet1("Shivansh", sayBye);
+// greet1("Shivansh", askQuestion);
+
+// another example - 
+// function fetchUserData(userName, callbackFunction){
+//     console.log(`⏳ Searching database for ${userName}...`)
+
+//     setTimeout(()=>{
+//         const userData = {
+//             name: userName,
+//             role: "Frontend Developer"
+//         }
+
+//         callbackFunction(userData);
+//     }, 3000);
+// };
+// function displayProfie(user){
+//     console.log(`Profile Loaded: ${user.name}, ${user.role}`);
+// }
+
+// fetchUserData("Shivansh", displayProfie);
+// console.log("The page is running even though the data is fetching");
+
+// function getUser(id, callback) {
+//     setTimeout(() => callback({ id, name: "Shivansh" }), 1000);
+// }
+
+// getUser(1, (user) => console.log(user));
+
+// simplified - 
+// function getUser1(id, callback){
+//     setTimeout(function(){
+//         callback({id, name: "Shivansh"})
+//     }, 2000)
+// }
+// getUser1(1, function(user){
+//     console.log(user);
+// })
+
+// Callback hell - Callback Hell is just deeply nested callbacks (one inside another). It is the main reason Promises and Async/Await were introduced. ex - 
+// function getProfile(username, callback){
+//     console.log("Fetching Profile data...");
+//     setTimeout(()=>{
+//         callback({_id: 121, username, age:22, email:"ankahunmein@gmail.com"})
+//     }, 2000)
+// }
+// function getAllPosts(id, callback){
+//     console.log("Fetching All Posts...")
+//     setTimeout(()=>{
+//         callback({_id: id, posts: ["Hey", "What'cha doing?", "Everything's okay?", "TimePass Posts", "Kya haal chal?"]})
+//     }, 3000)
+// }
+// function getSavedPosts(id, callback){
+//     console.log("Fetching saved posts...");
+//     setTimeout(()=>{
+//         callback({_id: id, saved: [2, 6, 14, 43]})
+//     }, 3000)
+// }
+
+// getProfile("Ankush", function(data){
+//     console.log(data);
+//     getAllPosts(data._id, function(posts){
+//         console.log(posts);
+//         getSavedPosts(data._id, function(saved){
+//             console.log(saved);
+//         })
+//     })
+// })
+
+
+
+// Promises - A promise is an object representing a value that isn’t available yet but will be (or will fail).
+// Why Promises? - Callbacks become messy when nested. Promises give a clearer way to handle success and failure.
+// Promise States - A Promise can be in one of three states: 1) Pending - Initial state (neither success nor failure);
+// 2) Fulfilled- Operation completed successfully; 3) Rejected - Operation failed. Once a promise is fulfilled or rejected, it is settled and cannot change.
+// Creating a Promise - 
+// const orderPizza = new Promise(function(resolve, reject){
+//     let shopIsOpen = true;
+
+//     console.log("🍕 Placing your pizza order...");
+
+//     setTimeout(()=>{
+//         if(shopIsOpen){
+//             resolve("Hot Pizza delivered! 🥳")
+//         }
+//         else{
+//             reject("Sorry, the shop is closed. 😢")
+//         }
+//     }, 3000)
+// })
+// // Consuming a Promise - 
+// orderPizza.then((successMessage)=>{
+//     // Catches whatever was passed inside resolve()
+//     console.log("SUCCESS:", successMessage);
+// }).catch((errorMessage)=>{
+//     // Catches whatever was passed inside reject()
+//     console.log("FAILED:", errorMessage);
+// });
+
+// another example - 
+// const fetchData = new Promise(function(resolve, reject){
+//     let serverOnline = false;
+//     console.log("🔄 Showing loading spinner...");
+//     setTimeout(()=>{
+//         if(serverOnline){
+//             resolve("User Profile Loaded!")
+//         }
+//         else{
+//             reject("Network Error 404")
+//         }
+//     }, 3000)
+// })
+// fetchData.then((data)=>{
+//     console.log("✅ Success:", data);
+// }).catch((err)=>{
+//     console.log("❌ Error:", err);
+// }).finally(()=>{
+//     // Runs EVERY time, whether it succeeded or failed!
+//     console.log("🛑 Hiding loading spinner.");
+// });
+// finally : .finally() runs automatically at the very end after promise is settled — it simply executes cleanup code after the waiting is over.
+
+
+// Promise Chaining - Promise chaining connects multiple asynchronous tasks in a clean, step-by-step sequence by returning a new Promise (or value) inside 
+// each .then() while letting a single .catch() at the bottom handle errors from any step. We can chain multiple .then() calls. ex - 
+function getProfile(username){
+    return new Promise(function(resolve, reject){
+        console.log("Fetching Profile data...");
+        setTimeout(()=>{
+            resolve({_id: 121, username, age:22, email:"ankahunmein@gmail.com"})
+        }, 2000)
+    })
+}
+function getAllPosts(id){
+    return new Promise(function(resolve, reject){
+        console.log("Fetching All Posts...");
+        setTimeout(()=>{
+            resolve({_id: id, posts: ["Hey", "What'cha doing?", "Everything's okay?", "TimePass Posts", "Kya haal chal?"]})
+        }, 3000)
+    })
+}
+function getSavedPosts(id){
+    return new Promise(function(resolve, reject){
+        console.log("Fetching saved posts...");
+        setTimeout(()=>{
+            resolve({_id: id, saved: [2, 6, 14, 43]})
+        }, 3000)
+    })
 }
 
-const c1 = new Car();
-c1.startCar();                                     // Here Car does not inherit from Engine. It contains an Engine.
+getProfile("Ankit").then((data)=>{
+    console.log(data);
+    return getAllPosts(data._id);
+}).then((posts)=>{
+    console.log(posts);
+    return getSavedPosts(posts._id);
+}).then((saved)=>{
+    console.log(saved);
+}).catch((err)=>{
+    console.log("Error fetching data:", err)
+}).finally(()=>{
+    console.log("All done!")
+})
