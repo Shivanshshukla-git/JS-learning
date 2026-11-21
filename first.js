@@ -884,6 +884,7 @@ console.log(Math.max.apply(null, numbers));               // 9
 //         }
 //     }, 3000)
 // })
+
 // // Consuming a Promise - 
 // orderPizza.then((successMessage)=>{
 //     // Catches whatever was passed inside resolve()
@@ -919,41 +920,114 @@ console.log(Math.max.apply(null, numbers));               // 9
 
 // Promise Chaining - Promise chaining connects multiple asynchronous tasks in a clean, step-by-step sequence by returning a new Promise (or value) inside 
 // each .then() while letting a single .catch() at the bottom handle errors from any step. We can chain multiple .then() calls. ex - 
-function getProfile(username){
-    return new Promise(function(resolve, reject){
-        console.log("Fetching Profile data...");
-        setTimeout(()=>{
-            resolve({_id: 121, username, age:22, email:"ankahunmein@gmail.com"})
-        }, 2000)
-    })
-}
-function getAllPosts(id){
-    return new Promise(function(resolve, reject){
-        console.log("Fetching All Posts...");
-        setTimeout(()=>{
-            resolve({_id: id, posts: ["Hey", "What'cha doing?", "Everything's okay?", "TimePass Posts", "Kya haal chal?"]})
-        }, 3000)
-    })
-}
-function getSavedPosts(id){
-    return new Promise(function(resolve, reject){
-        console.log("Fetching saved posts...");
-        setTimeout(()=>{
-            resolve({_id: id, saved: [2, 6, 14, 43]})
-        }, 3000)
-    })
+// function getProfile(username){
+//     return new Promise(function(resolve){
+//         console.log("Fetching Profile data...");
+//         setTimeout(()=>{
+//             resolve({_id: 121, username, age:22, email:"ankahunmein@gmail.com"})
+//         }, 2000)
+//     })
+// }
+// function getAllPosts(id){
+//     return new Promise(function(resolve){
+//         console.log("Fetching All Posts...");
+//         setTimeout(()=>{
+//             resolve({_id: id, posts: ["Hey", "What'cha doing?", "Everything's okay?", "TimePass Posts", "Kya haal chal?"]})
+//         }, 3000)
+//     })
+// }
+// function getSavedPosts(id){
+//     return new Promise(function(resolve){
+//         console.log("Fetching saved posts...");
+//         setTimeout(()=>{
+//             resolve({_id: id, saved: [2, 6, 14, 43]})
+//         }, 3000)
+//     })
+// }
+
+// getProfile("Ankit").then((data)=>{
+//     console.log(data);
+//     return getAllPosts(data._id);
+// }).then((posts)=>{
+//     console.log(posts);
+//     return getSavedPosts(posts._id);
+// }).then((saved)=>{
+//     console.log(saved);
+// }).catch((err)=>{
+//     console.log("Error fetching data:", err)
+// }).finally(()=>{
+//     console.log("All done!")
+// })
+
+
+// Important Promise methods - 
+// 1) Promise.all() : Waits for all promises to succeed. Fails if any one fails. Use: Independent requests you need all of.
+// 2) Promise.race() : Returns the result of the first settled promise (success or fail). Use: Timeouts.
+// 3) Promise.allSettled() : Waits for all promises to settle (whether success or fail) and gives the status of each. Use: You want every outcome, even failures.
+// 4) Promise.any() : Returns the first successful promise. Ignores failures unless all fail. Use: Fastest successful source.
+
+
+
+// Async/Await : async/await is modern syntax built on top of Promises. It makes asynchronous code look and behave more like synchronous code.
+// 1) async keyword : When you put async before a function, that function always returns a Promise.
+async function greet2(){
+    return "Hello from async!"
 }
 
-getProfile("Ankit").then((data)=>{
-    console.log(data);
-    return getAllPosts(data._id);
-}).then((posts)=>{
-    console.log(posts);
-    return getSavedPosts(posts._id);
-}).then((saved)=>{
-    console.log(saved);
-}).catch((err)=>{
-    console.log("Error fetching data:", err)
-}).finally(()=>{
-    console.log("All done!")
-})
+greet2().then(result => console.log(result));
+// Even if we return a normal value, JavaScript wraps it in a resolved Promise.
+
+// 2) await keyword : await can only be used inside an async function. 
+// It pauses the execution of the async function until the Promise is settled, then returns the result.
+// const somePromise = new Promise((resolve)=>{
+//     setTimeout(()=>{
+//         console.log("Data Arrived succesfully");
+//     }, 2000)
+// })
+// async function fetchData1(){
+//     console.log("⏳ Fetching for data...")
+
+//     // JavaScript pauses on this line until somePromise resolves!
+//     const result = await somePromise;
+
+//     // Runs automatically after 2 seconds with the resolved string
+//     console.log(result);
+// }
+// fetchData1();
+
+// OR,
+
+function somePromise(){
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+        resolve("Data Arrived succesfully");
+    }, 2000)
+    });
+}
+// async function fetchData1(){
+//     console.log("⏳ Fetching for data...");
+
+//     // JavaScript pauses on this line until somePromise resolves!
+//     const result = await somePromise();
+
+//     // Runs automatically after 2 seconds with the resolved string
+//     console.log(result);
+//     console.log("End");
+// }
+// fetchData1();
+
+// Error Handling with try...catch - With async/await we use normal try...catch instead of .catch().
+async function fetchData1(){
+    console.log("⏳ Fetching for data...");
+    try{
+        const result = await somePromise();
+        console.log(result);
+    }
+    catch(error){
+        console.log("Error:", error);
+    }
+    finally{
+        console.log("All done!");
+    }
+};
+fetchData1();
