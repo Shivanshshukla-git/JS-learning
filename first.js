@@ -932,9 +932,9 @@ console.log(Math.max.apply(null, numbers));               // 9
 //     return new Promise(function(resolve){
 //         console.log("Fetching All Posts...");
 //         setTimeout(()=>{
-//             resolve({_id: id, posts: ["Hey", "What'cha doing?", "Everything's okay?", "TimePass Posts", "Kya haal chal?"]})
+//             resolve({_id: id, posts: ["Hey", "What'cha doing?", "Everything's okay?", "TimePass Posts", "Kya haal chal?"]});
 //         }, 3000)
-//     })
+//     });
 // }
 // function getSavedPosts(id){
 //     return new Promise(function(resolve){
@@ -970,11 +970,11 @@ console.log(Math.max.apply(null, numbers));               // 9
 
 // Async/Await : async/await is modern syntax built on top of Promises. It makes asynchronous code look and behave more like synchronous code.
 // 1) async keyword : When you put async before a function, that function always returns a Promise.
-async function greet2(){
-    return "Hello from async!"
-}
+// async function greet2(){
+//     return "Hello from async!";
+// }
 
-greet2().then(result => console.log(result));
+// greet2().then(result => console.log(result));
 // Even if we return a normal value, JavaScript wraps it in a resolved Promise.
 
 // 2) await keyword : await can only be used inside an async function. 
@@ -1017,17 +1017,175 @@ function somePromise(){
 // fetchData1();
 
 // Error Handling with try...catch - With async/await we use normal try...catch instead of .catch().
-async function fetchData1(){
-    console.log("⏳ Fetching for data...");
-    try{
-        const result = await somePromise();
-        console.log(result);
-    }
-    catch(error){
-        console.log("Error:", error);
-    }
-    finally{
-        console.log("All done!");
-    }
-};
-fetchData1();
+// async function fetchData1(){
+//     console.log("⏳ Fetching for data...");
+//     try{
+//         const result = await somePromise();
+//         console.log(result);
+//     }
+//     catch(error){
+//         console.log("Error:", error);
+//     }
+//     finally{
+//         console.log("All done!");
+//     }
+// };
+// fetchData1();
+
+// another example - 
+// function getProfile(username){
+//     return new Promise(function(resolve){
+//         console.log("Fetching Profile data...");
+//         setTimeout(()=>{
+//             resolve({_id: 121, username, age:22, email:"ankahunmein@gmail.com"})
+//         }, 2000)
+//     })
+// }
+// function getAllPosts(id){
+//     return new Promise(function(resolve){
+//         console.log("Fetching All Posts...");
+//         setTimeout(()=>{
+//             resolve({_id: id, posts: ["Hey", "What'cha doing?", "Everything's okay?", "TimePass Posts", "Kya haal chal?"]});
+//         }, 3000)
+//     });
+// }
+// function getSavedPosts(id){
+//     return new Promise(function(resolve){
+//         console.log("Fetching saved posts...");
+//         setTimeout(()=>{
+//             resolve({_id: id, saved: [2, 6, 14, 43]})
+//         }, 3000)
+//     })
+// }
+// async function loadUserInfo(){
+//     try{
+//         const profile = await getProfile("Ajay");
+//         console.log(profile);
+//         console.log("Got User Data!");
+
+//         const posts = await getAllPosts(profile._id);
+//         console.log(posts);
+//         console.log("Got All Posts!");
+
+//         const saved = await getSavedPosts(profile._id);
+//         console.log(saved);
+//         console.log("Got Saved Posts!");
+//     }
+//     catch (err){
+//         console.log("Error:", err);
+//     }
+//     finally{
+//         console.log("All done!");
+//     }
+// }
+// loadUserInfo();
+
+
+// Sequential vs Parallel - Sequential execution runs tasks one after another in a single-file line,
+// While Parallel execution starts all tasks at the exact same time so they run simultaneously.
+// function getUser2(){
+//     return new Promise((resolve)=>{
+//         setTimeout(()=> resolve("Shivansh"), 2000);
+//     })
+// }
+// function getNotifications(){
+//     return new Promise((resolve)=>{
+//         setTimeout(()=> resolve("🔔 5 New Alerts"), 2000);
+//     })
+// }
+// async function loadSequential(){
+//     console.time("Sequential Time");
+
+//     const user = await getUser2();                           // Waits 2 seconds...
+//     const alerts = await getNotifications();                 // Waits ANOTHER 2 seconds...
+
+//     console.log("Sequential:", user, "|", alerts);
+//     console.timeEnd("Sequential Time");
+// }
+// async function loadParallel(){
+//     console.time("Parallel Time");
+
+//     const [user, alerts] = await Promise.all([
+//         getUser2(),
+//         getNotifications()
+//     ]);
+
+//     console.log("Parallel:", user, "|", alerts);
+//     console.timeEnd("Parallel Time");
+// }
+// // loadSequential();
+// loadParallel();
+
+// Some doubts in async and await:
+// i) forEach vs for...of - We avoid await inside .forEach() because .forEach() does not wait for Promises—it fires all iterations at once and immediately moves on,
+// whereas for...of properly pauses at each await until that step finishes. ex - 
+
+// function downloadItem(item) {                  // Helper function that takes 1 second per item;
+//     return new Promise((resolve) => {
+//         setTimeout(() => {
+//             console.log(`✅ Downloaded: ${item}`);
+//             resolve();
+//         }, 1000);
+//     });
+// }
+// const files = ["File 1", "File 2", "File 3"];
+
+// // Using .forEach() with await
+// async function badDownload() {
+//     console.log("--- Starting forEach ---");
+    
+//     files.forEach(async (file) => {
+//         await downloadItem(file);                            // Fires all 3 timers at once!
+//     });
+
+//     console.log("🛑 All downloads complete!");              // ⚠️ BUG: Prints IMMEDIATELY before any file downloads!
+// }
+
+// // ✅ Using for...of with await - 
+// async function goodDownload() {
+//     console.log("--- Starting for...of ---");
+
+//     for (const file of files) {
+//         await downloadItem(file);                            // Properly pauses 1s -> 2s -> 3s in strict order!
+//     }
+
+//     console.log("🎉 All downloads complete!");               // Runs ONLY after File 3 finishes!
+// }
+// // badDownload();
+// goodDownload();
+
+// ii) Forgetting await. You get a pending Promise object, not the data. If a variable prints Promise { <pending> }, this is why.
+// iii) In JS, writing a try{} block alone without a catch (or finally) block is actually a syntax error—
+// JS physically refuses to run your code unless try is paired with catch or finally.
+// iv) Order of Multiple Requests - multiple async requests can finish in a different order than you started them.
+
+// function fetchAPI(taskName, delayMs) {
+//     return new Promise((resolve) => {
+//         setTimeout(() => {
+//             console.log(`✅ Finished: ${taskName} (took ${delayMs / 1000}s)`);
+//             resolve(taskName);
+//         }, delayMs);
+//     });
+// }
+// console.log("🚀 Starting all 3 requests at 0s...");
+
+// fetchAPI("Request 1: Heavy Video", 3000);     // Started 1st, finishes LAST (at 3s)
+// fetchAPI("Request 2: User Profile", 1000);    // Started 2nd, finishes 2nd (at 1s)
+// fetchAPI("Request 3: Quick Ping", 500);       // Started 3rd, finishes FIRST (at 0.5s)
+
+// v) Event Loop (Simple Version):- JavaScript has: a) Call Stack → Where functions run; b) Web APIs → setTimeout, fetch, DOM events, etc;
+// c) Microtask Queue → Promises (.then, async/await); d) Macrotask Queue → setTimeout, setInterval, etc.
+// How it works: Call Stack runs normal synchronous code -> Any async tasks (like setTimeout, fetch) are sent to Web APIs ->
+// When a Web API finishes, it puts the callback into the correct queue: a) Promises → Microtask Queue; b) setTimeout / setInterval → Macrotask Queue
+// When the Call Stack is empty: a) First, all Microtasks are executed; b) Then one Macrotask is executed; c)Then again check Microtasks, and so on. ex - 
+console.log("A");
+setTimeout(() => console.log("B"), 0);
+Promise.resolve().then(() => console.log("C"));
+(async () => {
+    console.log("D");
+    await null;
+    console.log("E");
+})();
+console.log("F");
+// output - A->D->F->C->E->B 
+//                                                    <--- Async JS Done --->
