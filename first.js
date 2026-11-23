@@ -1189,3 +1189,25 @@ Promise.resolve().then(() => console.log("C"));
 console.log("F");
 // output - A->D->F->C->E->B 
 //                                                    <--- Async JS Done --->
+
+
+// Fetch API :-
+// 1) HTTP - HTTP (HyperText Transfer Protocol) is the system that browsers and servers use to talk to each other.
+// When you open a website or call an API, your browser sends an HTTP Request, and the server sends back an HTTP Response.
+// i) Main Parts of an HTTP Request: a) URL - Address of the resource (ex- https://api.example.com/users); 
+// b) Method - What action you want to perform (ex- GET, POST, PUT, DELETE); c) Headers - Extra information (ex- Content-Type: application/json); 
+// d) Body - Data you send (mostly with POST/PUT){ex- "name": "Shivansh" }. 
+// ii) Common terms need to know: a) Request - What the browser sends to the server; b) Response - What the server sends back;
+// c) URL / Endpoint - The address you are requesting; d) Method - Type of request (GET, POST, PUT, DELETE...);
+// e) Status Code - Number that tells success or failure (200, 404, 500...); f) Headers - Extra information about the request/response;
+// g) Body - The actual data being sent (usually in POST/PUT).
+// iii) Main HTTP Methods: a) GET - Read/fetch data (ex- get list of users); b) POST- Create new data (ex- add a new user);
+// c) PUT - Update entire data (ex- Replace a user); d) PATCH - Update partial data (ex- Change only user email); e) DELETE - Delete data (ex- Remove a user).
+// iv) HTTP Status Codes (Very Important): a) 2xx - Success (ex- 200 OK, 201 Created); b) 3xx - Redirect (ex- 301, 302);
+// c) 4xx - Client Error (your fault) {ex- 400 Bad Request, 401 Unauthorized, 404 Not Found}; d) 5xx - Server Error (ex- 500 Internal Server Error).
+// Some common HTTP status codes - 200 → Success; 201 → Created successfully; 400 → Bad request (wrong data); 401 → Unauthorized (not logged in)
+// 403 → Forbidden; 404 → Not found; 500 → Server crashed / error. ex - 
+fetch("https://jsonplaceholder.typicode.com/users")                // You are sending a GET request to that URL.
+  .then(response => response.json())                               // The server responds with status 200 and the list of users.
+  .then(data => console.log(data))
+  .catch(error => console.log("Error:", error));
