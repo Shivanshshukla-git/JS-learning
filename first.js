@@ -1197,17 +1197,213 @@ console.log("F");
 // i) Main Parts of an HTTP Request: a) URL - Address of the resource (ex- https://api.example.com/users); 
 // b) Method - What action you want to perform (ex- GET, POST, PUT, DELETE); c) Headers - Extra information (ex- Content-Type: application/json); 
 // d) Body - Data you send (mostly with POST/PUT){ex- "name": "Shivansh" }. 
+
 // ii) Common terms need to know: a) Request - What the browser sends to the server; b) Response - What the server sends back;
 // c) URL / Endpoint - The address you are requesting; d) Method - Type of request (GET, POST, PUT, DELETE...);
 // e) Status Code - Number that tells success or failure (200, 404, 500...); f) Headers - Extra information about the request/response;
 // g) Body - The actual data being sent (usually in POST/PUT).
+
 // iii) Main HTTP Methods: a) GET - Read/fetch data (ex- get list of users); b) POST- Create new data (ex- add a new user);
 // c) PUT - Update entire data (ex- Replace a user); d) PATCH - Update partial data (ex- Change only user email); e) DELETE - Delete data (ex- Remove a user).
+
 // iv) HTTP Status Codes (Very Important): a) 2xx - Success (ex- 200 OK, 201 Created); b) 3xx - Redirect (ex- 301, 302);
 // c) 4xx - Client Error (your fault) {ex- 400 Bad Request, 401 Unauthorized, 404 Not Found}; d) 5xx - Server Error (ex- 500 Internal Server Error).
+
 // Some common HTTP status codes - 200 → Success; 201 → Created successfully; 400 → Bad request (wrong data); 401 → Unauthorized (not logged in)
 // 403 → Forbidden; 404 → Not found; 500 → Server crashed / error. ex - 
-fetch("https://jsonplaceholder.typicode.com/users")                // You are sending a GET request to that URL.
-  .then(response => response.json())                               // The server responds with status 200 and the list of users.
-  .then(data => console.log(data))
-  .catch(error => console.log("Error:", error));
+// fetch("https://jsonplaceholder.typicode.com/users")                // You are sending a GET request to that URL.
+// .then(response => response.json())                               // The server responds with status 200 and the list of users.
+// .then(data => console.log(data))
+// .catch(error => console.log("Error:", error));
+
+
+// 2) fetch() - fetch() is the modern built-in function in JavaScript used to make HTTP requests. It returns a Promise. ex - fetch(URL, options):
+// URL- the address you want to request; options → (optional) object where you can set method, headers, body, etc; By default, fetch makes a GET request.
+
+// i) Simple GET Request - 
+// fetch("https://jsonplaceholder.typicode.com/users")
+// .then((response)=>{
+//     return response.json();                  // converts response to JS object;
+// })
+// .then((data)=>{
+//     console.log(data);
+// })
+// .catch((err)=>{
+//     console.log("Error:", err);
+// })
+// with async/await - 
+// async function getUsers(){
+//     try{
+//         const response = await fetch("https://jsonplaceholder.typicode.com/users");
+//         const response_data = await response.json();
+//         console.log(response_data);
+//     }
+//     catch(err){
+//         console.log("Error:", err)
+//     }
+// }
+// getUsers();
+
+// ii) When we do fetch(...), we get a response object.
+// Useful properties and methods: a) response.ok - true if status is 200–299; b) response.status - Status code (200, 404, 500, etc.); 
+// c) response.json() - Converts response body to JS object; d) response.text() - Converts response body to plain text; e) response.headers - Response headers.
+
+// iii) Checking if Request was Successful: fetch does not reject on 404 or 500. It only rejects on network failure. So we should always check response.ok
+async function getUsers1(){
+    try{
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+        if(!response.ok){
+            throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+
+        const response_data = await response.json();
+        console.log(response_data);
+    }
+    catch(err){
+        console.log("Failed:", err.message);
+    }
+}
+getUsers1();
+
+
+// 3) POST - POST is used to send data to the server (usually to create something new). 
+// Examples: Creating a new user; Submitting a form; Adding a new post/comment. ex - 
+async function createUser(){
+    const newUser = {
+        name: "Ankit",
+        role: "Purchase Executive",
+        bio: "A fresh graduate working as purchase executive"
+    };
+
+    try{
+        const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newUser)
+        });
+
+        if(!response.ok){
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("User Created: ", data);
+    }
+    catch(err){
+        console.log("Error:", err.message);
+    }
+}
+createUser();
+// a) method- Tells server we want to POST; b) headers- Extra information (especially Content-Type); c) body- The actual data we are sending;
+// Important Points: a) The body must be a string, so we use JSON.stringify(); b) Always set method: "POST"; 
+// c) Almost always set header: "Content-Type": "application/json"; d) The server usually responds with the newly created data (often with an id).
+
+async function newPost(){
+    try{
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: "My First Post",  
+                body: "This is a practice post using fetch POST request",
+                userId: 1
+            })
+            });
+        
+        if(!response.ok){
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+    }
+    catch(err){
+        console.log("Error:", err.message);
+    }
+}
+newPost();
+
+
+// 4) PUT - Replace entire data; Use PUT when you want to completely update a resource.
+async function updatePost() {
+    try{
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: 1,
+                title: "Updated Title",
+                body: "This post has been completely updated",
+                userId: 1
+            })
+        }); 
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Updated:", data);
+    }
+    catch(err){
+        console.log("Error:", err.message);
+    }
+}
+updatePost();
+
+
+// 5) PATCH – Update only some fields; Use PATCH when you want to change only specific fields.
+async function patchPost() {
+    try{
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                title: "Only title is updated"
+            })
+        }); 
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Pacthed:", data);
+    }
+    catch(err){
+        console.log("Error:", err.message);
+    }
+}
+patchPost();
+
+
+// 6) DELETE – Remove data.
+async function deletePost() {
+    try{
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+            method: "DELETE"
+        }); 
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Post deleted successfully!");
+    }
+    catch(err){
+        console.log("Error:", err.message);
+    }
+}
+deletePost();
+// Important Notes: a) For PUT and PATCH, you still need: method, headers (Content-Type), body: JSON.stringify(...);
+// For DELETE, body is usually not needed; Always check response.ok.
