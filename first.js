@@ -1269,141 +1269,232 @@ getUsers1();
 
 // 3) POST - POST is used to send data to the server (usually to create something new). 
 // Examples: Creating a new user; Submitting a form; Adding a new post/comment. ex - 
-async function createUser(){
-    const newUser = {
-        name: "Ankit",
-        role: "Purchase Executive",
-        bio: "A fresh graduate working as purchase executive"
-    };
+// async function createUser(){
+//     const newUser = {
+//         name: "Ankit",
+//         role: "Purchase Executive",
+//         bio: "A fresh graduate working as purchase executive"
+//     };
 
-    try{
-        const response = await fetch("https://jsonplaceholder.typicode.com/users", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newUser)
-        });
+//     try{
+//         const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify(newUser)
+//         });
 
-        if(!response.ok){
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+//         if(!response.ok){
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
 
-        const data = await response.json();
-        console.log("User Created: ", data);
-    }
-    catch(err){
-        console.log("Error:", err.message);
-    }
-}
-createUser();
+//         const data = await response.json();
+//         console.log("User Created: ", data);
+//     }
+//     catch(err){
+//         console.log("Error:", err.message);
+//     }
+// }
+// createUser();
 // a) method- Tells server we want to POST; b) headers- Extra information (especially Content-Type); c) body- The actual data we are sending;
 // Important Points: a) The body must be a string, so we use JSON.stringify(); b) Always set method: "POST"; 
 // c) Almost always set header: "Content-Type": "application/json"; d) The server usually responds with the newly created data (often with an id).
 
-async function newPost(){
-    try{
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                title: "My First Post",  
-                body: "This is a practice post using fetch POST request",
-                userId: 1
-            })
-            });
+// async function newPost(){
+//     try{
+//         const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({
+//                 title: "My First Post",  
+//                 body: "This is a practice post using fetch POST request",
+//                 userId: 1
+//             })
+//             });
         
-        if(!response.ok){
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+//         if(!response.ok){
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
 
-        const data = await response.json();
-        console.log(data);
-    }
-    catch(err){
-        console.log("Error:", err.message);
-    }
-}
-newPost();
+//         const data = await response.json();
+//         console.log(data);
+//     }
+//     catch(err){
+//         console.log("Error:", err.message);
+//     }
+// }
+// newPost();
 
 
 // 4) PUT - Replace entire data; Use PUT when you want to completely update a resource.
-async function updatePost() {
-    try{
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                id: 1,
-                title: "Updated Title",
-                body: "This post has been completely updated",
-                userId: 1
-            })
-        }); 
+// async function updatePost() {
+//     try{
+//         const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//             method: "PUT",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({
+//                 id: 1,
+//                 title: "Updated Title",
+//                 body: "This post has been completely updated",
+//                 userId: 1
+//             })
+//         }); 
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
 
-        const data = await response.json();
-        console.log("Updated:", data);
-    }
-    catch(err){
-        console.log("Error:", err.message);
-    }
-}
-updatePost();
+//         const data = await response.json();
+//         console.log("Updated:", data);
+//     }
+//     catch(err){
+//         console.log("Error:", err.message);
+//     }
+// }
+// updatePost();
 
 
 // 5) PATCH – Update only some fields; Use PATCH when you want to change only specific fields.
-async function patchPost() {
-    try{
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                title: "Only title is updated"
-            })
-        }); 
+// async function patchPost() {
+//     try{
+//         const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//             method: "PATCH",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({
+//                 title: "Only title is updated"
+//             })
+//         }); 
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
 
-        const data = await response.json();
-        console.log("Pacthed:", data);
-    }
-    catch(err){
-        console.log("Error:", err.message);
-    }
-}
-patchPost();
+//         const data = await response.json();
+//         console.log("Pacthed:", data);
+//     }
+//     catch(err){
+//         console.log("Error:", err.message);
+//     }
+// }
+// patchPost();
 
 
 // 6) DELETE – Remove data.
-async function deletePost() {
-    try{
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
-            method: "DELETE"
-        }); 
+// async function deletePost() {
+//     try{
+//         const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//             method: "DELETE"
+//         }); 
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+//         if (!response.ok) {
+//             throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
 
-        const data = await response.json();
-        console.log("Post deleted successfully!");
-    }
-    catch(err){
-        console.log("Error:", err.message);
-    }
-}
-deletePost();
+//         const data = await response.json();
+//         console.log("Post deleted successfully!");
+//     }
+//     catch(err){
+//         console.log("Error:", err.message);
+//     }
+// }
+// deletePost();
 // Important Notes: a) For PUT and PATCH, you still need: method, headers (Content-Type), body: JSON.stringify(...);
 // For DELETE, body is usually not needed; Always check response.ok.
+
+
+// 7) Headers - Headers are extra information you send with an HTTP request (or receive in a response). i) They tell the server things like:
+// a) What type of data you are sending; b) What type of data you expect back; c) Authentication tokens; etc..
+// fetch(url, {
+//   method: "POST",
+//   headers: {
+//     "Content-Type": "application/json",
+//     "Authorization": "Bearer your-token-here"            // example of another header
+//   },
+//   body: JSON.stringify(data)
+// })
+
+// ii) Common Headers you will see: a) Content-Type - Format of the data you are sending; b) Accept - Format you want the server to send back; 
+// c) Authorization - For login / protected APIs (tokens); d) Cache-Control - Caching instructions.
+
+// 8) Common mistakes in fetch - a) forgetting await on response.json(); b) not checking response.ok; c) forgetting JSON.stringify() in PATCH, PUT, POST;
+// d) forgetting content-type header; 
+
+
+// 8) Query Parameters (URLSearchParams) - Query parameters are the part of the URL after ?.
+// ex - https://api.example.com/users?page=2&limit=10&role=admin .
+// How to use (correct way) - 
+// const params = new URLSearchParams({
+//     page: 2,
+//     limit: 10,
+//     role: "admin"
+// });
+// const url = `https://api.example.com/users?${params.toString()}`;
+// Result: https://api.example.com/users?page=2&limit=10&role=admin.
+
+// full example with fetch - 
+// async function getUsers2(page = 1, limit = 5){
+//     const params = new URLSearchParams({
+//         page: page,
+//         limit: limit
+//     })
+
+//     const response = await fetch(`https://jsonplaceholder.typicode.com/users?${params}`);
+//     const data = await response.json();
+//     console.log(data);
+// }
+// getUsers2();
+// Uses - a) Automatically encodes special characters; b) Cleaner and safer; c) Easy to add/remove parameters
+
+
+// 9) Four UI States - Whenever you fetch data, your UI should handle these 4 states: a) Loading - Request is in progress (what to show: Spinner / "Loading...");
+// b) Error - Request failed (what to show: Error message); c) Empty - Request succeeded but no data (what to show: "No data found");
+// d) Success - Request succeeded with dataShow (what to show: the actual data); ex - (not running but just to understand) 
+async function loadUsers() {
+    // 1. Loading state
+    container.innerHTML = `<p>Loading...</p>`;
+
+    try {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch users");
+        }
+
+        const users = await response.json();
+
+        // 2. Empty state
+        if (users.length === 0) {
+            container.innerHTML = `<p>No users found</p>`;
+            return;
+        }
+
+        // 3. Success state
+        container.innerHTML = users.map(user => `
+            <div class="user-card">
+                <h3>${user.name}</h3>
+                <p>${user.email}</p>
+            </div>
+        `).join("");
+    
+    } 
+    catch (error) {
+        // 4. Error state
+        container.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+    }
+}
+
+
+// 10) CORS (just infor for now) - CORS stands for Cross-Origin Resource Sharing. ex - http://localhost:5500 and https://api.example.com are different origins. 
+// Browsers block requests from one origin to another by default for security reasons.
+// So if your frontend is running on localhost:5500 and you try to fetch data from another domain, the browser may block it.
+// How it works: a) Browser sends the request; b) Server responds with special headers (like Access-Control-Allow-Origin);
+// c) If the server allows your origin → request succeeds; d) If not → Browser blocks it and you get a CORS error
+
+// Rule: Always treat data coming from an API as untrusted; Use network tab in devtools for work & debugging.
